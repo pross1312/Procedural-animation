@@ -20,14 +20,16 @@ bool load_plug() {
     return true;
 }
 
-int main() {
+int main(int argc, char** argv) {
+    TraceLog(LOG_INFO, "W: %s", GetWorkingDirectory());
+    TraceLog(LOG_INFO, "A: %s", GetApplicationDirectory());
     if (!load_plug()) {
         TraceLog(LOG_ERROR, "Can't load plug");
         return 1;
     }
-    InitWindow(600, 600, "Hello world fex");
+    InitWindow(1300, 900, "Fex");
     SetTargetFPS(60);
-    plug_init();
+    plug_init(argc, argv);
     while (!WindowShouldClose()) {
         if (IsKeyPressed(KEY_R)) {
             void* state = plug_pre_reload();
@@ -37,7 +39,7 @@ int main() {
             }
             plug_post_reload(state);
         }
-        plug_update();
+        plug_update(GetFrameTime());
     }
     CloseWindow();
     return 0;
