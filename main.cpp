@@ -28,6 +28,8 @@ int main(int argc, char** argv) {
         return 1;
     }
     InitWindow(1300, 900, "Fex");
+    SetWindowState(FLAG_WINDOW_RESIZABLE);
+    SetWindowMinSize(100, 100);
     SetTargetFPS(60);
     plug_init(argc, argv);
     while (!WindowShouldClose()) {
